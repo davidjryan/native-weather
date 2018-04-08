@@ -1,16 +1,26 @@
-import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import React, { Component } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  Platform ,
+  KeyboardAvoidingView,
+  TextInput
+} from 'react-native';
 
-export default class App extends React.Component {
+import SearchInput from './components/SearchInput'
+
+export default class App extends Component {
 
   render() {
-    const { largeText, smallText, textStyle } = styles;
+    const { largeText, smallText, textStyle, textInput } = styles;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={[largeText, textStyle]}>San Francisco</Text>
         <Text style={[smallText, textStyle]}>Light Cloud</Text>
         <Text style={[smallText, textStyle]}>24˚</Text>
-      </View>
+        <SearchInput placeholder="Search any city"/>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -31,5 +41,5 @@ const styles = StyleSheet.create({
 	},
 	smallText: {
 		fontSize: 18,
-	},
+  },
 });
