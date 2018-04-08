@@ -8,6 +8,8 @@ import {
   TextInput
 } from 'react-native';
 
+import SearchInput from './components/SearchInput'
+
 export default class App extends Component {
 
   render() {
@@ -17,13 +19,7 @@ export default class App extends Component {
         <Text style={[largeText, textStyle]}>San Francisco</Text>
         <Text style={[smallText, textStyle]}>Light Cloud</Text>
         <Text style={[smallText, textStyle]}>24˚</Text>
-        <TextInput
-          autoCorrect={false}
-          placeholder="Search any city"
-          placeholderTextColor="white"
-          style={textInput}
-          clearButtonMode="always"   
-        />
+        <SearchInput placeholder="Search any city"/>
       </KeyboardAvoidingView>
     );
   }
@@ -46,14 +42,4 @@ const styles = StyleSheet.create({
 	smallText: {
 		fontSize: 18,
   },
-  textInput: {
-    backgroundColor: '#666',
-    color: 'white',
-    height: 40,
-    width: 300,
-    marginTop: 20,
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    alignSelf: 'center',
-  }
 });
