@@ -10,7 +10,7 @@ export default class SearchInput extends Component {
     }
   }
 
-  handleChangeText = newLocation => {
+  handleChangeText = text => {
     this.setState({ text });
   }
 
