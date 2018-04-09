@@ -23,33 +23,31 @@ export default class App extends Component {
       loading: false,
       error: false,
       location: '',
-      tempurature: 0,
+      temperature: 0,
       weather: '',
     }
   }
   
   componentDidMount() {
-    this.handleUpdateLocation('San Francisco');
+    this.handleUpdateLocation('Denver');
   }
 
-  handleUpdateLocation =  async city => {
+  handleUpdateLocation = async city => {
     if (!city) return;
 
-    this.setState({loading: true}), async () => {
+    this.setState({loading: true}, async () => {
       try {
         const locationId = await fetchLocationId(city);
-        const { location, weather, tempurature } = await
-
-        fetchWeather(
+        const { location, weather, temperature } = await fetchWeather(
           locationId,
         );
 
         this.setState({
-          loading: flase,
+          loading: false,
           error: false,
           location,
           weather,
-          tempurature,
+          temperature,
         });
       } catch (e) {
         this.setState({
@@ -57,12 +55,41 @@ export default class App extends Component {
           error: true,
         })
       }
-    }
+    })
+  }
+
+  renderContent() {
+    const { error } = this.state;
+    const { largeText, smallText, textStyle } = styles;
+
+    return (
+      <View>
+        {error && <Text style={[smallText, textStyle]}>
+                    Could not load weather, please try a different city.
+                  </Text>}
+        {!error && this.renderInfo()}
+        <SearchInput placeholder="Search any city" onSubmit={this.handleUpdateLocation} />
+      </View>
+
+    )
+  }
+
+  renderInfo() {
+    const { location, weather, temperature } = this.state;
+    const { largeText, smallText, textStyle } = styles;
+
+    return (
+      <View>
+        <Text style={[largeText, textStyle]}>{location}</Text>
+        <Text style={[smallText, textStyle]}>{weather}</Text>
+        <Text style={[smallText, textStyle]}>{`${Math.round(temperature)}˚`}</Text>
+      </View>
+    );
   }
 
   render() {
-    const { location, loading, error, weather, tempurature } = this.state;
-    const { largeText, smallText, textStyle, textInput, imageContainer, image, detailsContainer, container } = styles;
+    const { location, loading, error, weather, temperature } = this.state;
+    const { textInput, imageContainer, image, detailsContainer, container } = styles;
 
     return (
       <KeyboardAvoidingView style={container} behavior="padding">
@@ -74,25 +101,7 @@ export default class App extends Component {
         >
           <View style={detailsContainer}>
             <ActivityIndicator animating={loading} color="white" size="large" />
-            
-            {!loading && (
-              <View>
-                {error && (
-                  <Text style={[smallText, textStyle]}>
-                    Could not load weather, please try a different city.
-                  </Text>
-                )}
-
-                {!error && (
-                  <View>
-                    <Text style={[largeText, textStyle]}>{location}</Text>
-                    <Text style={[largeText, textStyle]}>{weather}</Text>
-                    <Text style={[largeText, textStyle]}>{`${Math.round(tempurature)}˚`}</Text>
-                  </View>
-                )}
-                <SearchInput placeholder="Search any city" onSubmit={this.handleUpdateLocation} />
-              </View>
-            )}
+            {!loading && this.renderContent()}
           </View>
         </ImageBackground>
       </KeyboardAvoidingView>
