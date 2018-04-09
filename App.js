@@ -13,11 +13,15 @@ import SearchInput from './components/SearchInput';
 import getImageForWeather from './utils/getImageForWeather'
 
 export default class App extends Component {
-
+  handleChangeText(newLocation) {
+    
+  }
   render() {
-    const { largeText, smallText, textStyle, textInput, imageContainer, image, detailsContainer } = styles;
+    const location = 'San Francisco';
+    const { largeText, smallText, textStyle, textInput, imageContainer, image, detailsContainer, container } = styles;
+
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView style={container} behavior="padding">
         <ImageBackground
           source={getImageForWeather('Clear')}
           style={imageContainer}
