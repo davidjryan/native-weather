@@ -13,9 +13,7 @@ import SearchInput from './components/SearchInput';
 import getImageForWeather from './utils/getImageForWeather'
 
 export default class App extends Component {
-  handleChangeText(newLocation) {
-    
-  }
+
   render() {
     const location = 'San Francisco';
     const { largeText, smallText, textStyle, textInput, imageContainer, image, detailsContainer, container } = styles;
