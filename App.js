@@ -16,16 +16,13 @@ import getImageForWeather from './utils/getImageForWeather';
 import { fetchLocationId, fetchWeather } from './utils/api';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      loading: false,
-      error: false,
-      location: '',
-      temperature: 0,
-      weather: '',
-    }
+  state = {
+    loading: false,
+    error: false,
+    location: '',
+    temperature: 0,
+    weather: '',
   }
   
   componentDidMount() {
