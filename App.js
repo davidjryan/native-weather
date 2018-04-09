@@ -95,7 +95,7 @@ export default class App extends Component {
       <KeyboardAvoidingView style={container} behavior="padding">
         <StatusBar barStyle="light-content" />
         <ImageBackground
-          source={getImageForWeather('Clear')}
+          source={getImageForWeather(weather)}
           style={imageContainer}
           imageStyle={image}
         >
