@@ -73,7 +73,7 @@ export default class App extends Component {
           imageStyle={image}
         >
           <View style={detailsContainer}>
-            <ActivityIndicator animating={loading} />
+            <ActivityIndicator animating={loading} color="white" size="large" />
             
             {!loading && (
               <View>
